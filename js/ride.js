@@ -41,6 +41,7 @@ WildRydes.map = WildRydes.map || {};
     function completeRequest(result) {
         var unicorn;
         var pronoun;
+        var pickupLocation = WildRydes.map.selectedPoint;
         var latitude = pickupLocation.latitude;
         var longitude = pickupLocation.longitude;
 
