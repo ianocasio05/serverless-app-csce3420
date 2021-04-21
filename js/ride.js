@@ -44,12 +44,34 @@ WildRydes.map = WildRydes.map || {};
         var pickupLocation = WildRydes.map.selectedPoint;
         var latitude = pickupLocation.latitude;
         var longitude = pickupLocation.longitude;
-        var latLongStr = latitude + "," + longitude;
+
+        const latLongNum = {
+            lat: parseFloat(latitude),
+            long: parseFloat(longitude)
+        };
+
+        geocoder.geocode({ location: latLongNum }, (results, status) => {
+            if (status === "OK") {
+                if (results[0]) {
+                    map.setZoom(11);
+                    const marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map,
+                    });
+                    infowindow.setContent(results[0].formatted_address);
+                    infowindow.open(map, marker);
+                } else {
+                    window.alert("No results found");
+                }
+            } else {
+                window.alert("Geocoder failed due to: " + status);
+            }
+        });
 
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
         pronoun = unicorn.Gender === 'Male' ? 'his' : 'her';
-        displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way to: ' + latLongStr);
+        displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way to: Latitude: ' + latitude + '//Longitude: ' + longitude);
         animateArrival(function animateCallback() {
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!');
             WildRydes.map.unsetLocation();
