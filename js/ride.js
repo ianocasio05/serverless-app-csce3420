@@ -41,8 +41,8 @@ WildRydes.map = WildRydes.map || {};
     function completeRequest(result) {
         var unicorn;
         var pronoun;
-        var latitude = pickupLocation.Latitude;
-        var longitude = pickupLocation.Longitude;
+        var latitude = Latitude;
+        var longitude = Longitude;
 
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
