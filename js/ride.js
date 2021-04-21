@@ -41,14 +41,14 @@ WildRydes.map = WildRydes.map || {};
     function completeRequest(result) {
         var unicorn;
         var pronoun;
-        var latitude = Latitude;
-        var longitude = Longitude;
+        //var latitude = Latitude;
+        //var longitude = Longitude;
 
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
         pronoun = unicorn.Gender === 'Male' ? 'his' : 'her';
         displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way.');
-        displayUpdate('Latitude: ' + latitude + '//Longitude: ' + longitude);
+        //displayUpdate('Latitude: ' + latitude + '//Longitude: ' + longitude);
         animateArrival(function animateCallback() {
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!');
             WildRydes.map.unsetLocation();
