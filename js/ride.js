@@ -47,20 +47,6 @@ WildRydes.map = WildRydes.map || {};
         var longitude = pickupLocation.longitude;
         var address;
 
-        let nodeGeocoder = require('node-geocoder');
-        let options = {
-            provider: 'openstreetmap'
-        };
-        let geoCoder = nodeGeocoder(options);
-        geoCoder.geocode({latitude, longitude })
-            .then((res) => {
-                address = res;
-            })
-            .catch((err) => {
-                //
-            })
-        
-
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
         pronoun = unicorn.Gender === 'Male' ? 'his' : 'her';
