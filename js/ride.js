@@ -42,10 +42,37 @@ WildRydes.map = WildRydes.map || {};
         var unicorn;
         var pronoun;
 
+        //get values from map for lat and long
         var pickupLocation = WildRydes.map.selectedPoint;
         var latitude = pickupLocation.latitude;
         var longitude = pickupLocation.longitude;
-        var address;
+        var address = "Test Address";
+
+        //import smartystreets api for reverse geocoding
+        const SmartyStreetsSDK = require("smartystreets-javascript-sdk");
+        const SmartyStreetsCore = SmartyStreetsSDK.core;
+        const Lookup = SmartyStreetsSDK.usReverseGeo.Lookup;
+
+        //authorization keys and credentials for api
+        let key = '86484628803009675';
+        let hostname = 'main.dy9s2h4d2yn90.amplifyapp.com';
+        const credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
+
+
+        let client = SmartyStreetsCore.buildClient.usReverseGeo(credentials);
+
+        let lookup1 = new Lookup(latitude, longitude);
+
+        client.send(lookup1)
+            .then(handleSuccess)
+            .catch(handleError);
+
+        function handleSuccess(response) {
+            address = result.result[0].address;
+        }
+        function handleError(response) {
+            //error
+        }
 
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
