@@ -52,7 +52,7 @@ WildRydes.map = WildRydes.map || {};
             provider: 'openstreetmap'
         };
         let geoCoder = nodeGeocoder(options);
-        geoCoder.geocode({ lat: latitude, lon: longitude })
+        geoCoder.geocode({latitude, longitude })
             .then((res) => {
                 address = res;
             })
