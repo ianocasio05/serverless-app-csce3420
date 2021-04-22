@@ -41,37 +41,30 @@ WildRydes.map = WildRydes.map || {};
     function completeRequest(result) {
         var unicorn;
         var pronoun;
+
         var pickupLocation = WildRydes.map.selectedPoint;
         var latitude = pickupLocation.latitude;
         var longitude = pickupLocation.longitude;
+        var address;
 
-        const latLongNum = {
-            lat: parseFloat(latitude),
-            long: parseFloat(longitude)
+        let nodeGeocoder = require('node-geocoder');
+        let options = {
+            provider: 'openstreetmap'
         };
-
-        geocoder.geocode({ location: latLongNum }, (results, status) => {
-            if (status === "OK") {
-                if (results[0]) {
-                    map.setZoom(11);
-                    const marker = new google.maps.Marker({
-                        position: latlng,
-                        map: map,
-                    });
-                    infowindow.setContent(results[0].formatted_address);
-                    infowindow.open(map, marker);
-                } else {
-                    window.alert("No results found");
-                }
-            } else {
-                window.alert("Geocoder failed due to: " + status);
-            }
-        });
+        let geoCoder = nodeGeocoder(options);
+        geoCoder.geocode({ lat: latitude, lon: longitude })
+            .then((res) => {
+                address = res;
+            })
+            .catch((err) => {
+                //
+            })
+        
 
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
         pronoun = unicorn.Gender === 'Male' ? 'his' : 'her';
-        displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way to: Latitude: ' + latitude + '//Longitude: ' + longitude);
+        displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way to:  ' + address);
         animateArrival(function animateCallback() {
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!');
             WildRydes.map.unsetLocation();
