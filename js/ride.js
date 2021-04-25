@@ -54,8 +54,8 @@ WildRydes.map = WildRydes.map || {};
         const Lookup = SmartyStreetsSDK.usReverseGeo.Lookup;
 
         //authorization keys and credentials for api
-        let key = '86484628803009675';
-        let hostname = 'main.dy9s2h4d2yn90.amplifyapp.com';
+        let key = '4e2a315d-ab7a-bee9-693a-ad4087bfe393';
+        let hostname = 'Ma7RyhvCr3JiEogAbujb';
         const credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
 
 
