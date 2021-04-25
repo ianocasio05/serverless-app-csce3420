@@ -49,7 +49,7 @@ WildRydes.map = WildRydes.map || {};
         var addressName = "Test Address";
 
         //import smartystreets api for reverse geocoding
-        const SmartyStreetsSDK = require("smartystreets-javascript-sdk");
+       /* const SmartyStreetsSDK = require("smartystreets-javascript-sdk");
         const SmartyStreetsCore = SmartyStreetsSDK.core;
         const Lookup = SmartyStreetsSDK.usReverseGeo.Lookup;
 
@@ -72,7 +72,7 @@ WildRydes.map = WildRydes.map || {};
         }
         function handleError(error) {
             console.log("ERROR:", error);
-        }
+        }*/
 
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
