@@ -42,40 +42,10 @@ WildRydes.map = WildRydes.map || {};
         var unicorn;
         var pronoun;
 
-        //get values from map for lat and long
-        var pickupLocation = WildRydes.map.selectedPoint;
-        var latitudePOS = pickupLocation.latitude;
-        var longitudePOS = pickupLocation.longitude;
-        var addressName = "Test Address";
-
-        //import smartystreets api for reverse geocoding
-        const SmartyStreetsSDK = require("smartystreets-javascript-sdk");
-        const SmartyStreetsCore = SmartyStreetsSDK.core;
-        const Lookup = SmartyStreetsSDK.usReverseGeo.Lookup;
-
-        //authorization keys and credentials for api
-        let authId = '4e2a315d-ab7a-bee9-693a-ad4087bfe393';
-        let authToken = 'Ma7RyhvCr3JiEogAbujb';
-        const credentials = new SmartyStreetsCore.StaticCredentials(authId,authToken);
-
-        let client = SmartyStreetsCore.buildClient.usReverseGeo(credentials);
-        let lookup1 = new Lookup(latitudePOS, longitudePOS);
-
-        client.send(lookup1)
-            .then(addStreet)
-            .catch(handleError);
-
-        function addStreet(result2) {
-            addressName = result2.result[0].address;
-        }
-        function handleError(error) {
-            console.log("ERROR:", error);
-        }
-
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
         pronoun = unicorn.Gender === 'Male' ? 'his' : 'her';
-        displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way to:  ' + addressName);
+        displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way! ');
         animateArrival(function animateCallback() {
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!');
             WildRydes.map.unsetLocation();
