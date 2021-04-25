@@ -68,8 +68,8 @@ WildRydes.map = WildRydes.map || {};
             .catch(handleError);
 
         function handleSuccess(response) {
-            result = response.lookup[0].result[0];
-            address = result.deliveryLine1 + " " + result.lastline;
+            //result = response.lookup[0].result[0];
+            //address = result.deliveryLine1 + " " + result.lastline;
         }
         function handleError(response) {
             //error
