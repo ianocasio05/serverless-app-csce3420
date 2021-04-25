@@ -3,6 +3,8 @@
 var WildRydes = window.WildRydes || {};
 WildRydes.map = WildRydes.map || {};
 
+var AWS = require("aws-sdk");
+
 (function rideScopeWrapper($) {
     var authToken;
     WildRydes.authToken.then(function setAuthToken(token) {
