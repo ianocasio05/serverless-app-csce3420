@@ -44,8 +44,8 @@ WildRydes.map = WildRydes.map || {};
 
         //get values from map for lat and long
         var pickupLocation = WildRydes.map.selectedPoint;
-        var latitude = pickupLocation.latitude;
-        var longitude = pickupLocation.longitude;
+        var latitudePOS = pickupLocation.latitude;
+        var longitudePOS = pickupLocation.longitude;
         var addressName = "Test Address";
 
         //import smartystreets api for reverse geocoding
@@ -61,16 +61,16 @@ WildRydes.map = WildRydes.map || {};
 
         let client = SmartyStreetsCore.buildClient.usReverseGeo(credentials);
 
-        let lookup = new Lookup(latitude, longitude);
+        let lookup = new Lookup(latitudePOS, longitudePOS);
 
         client.send(lookup)
             .then(addStreet)
             .catch(handleError);
 
-        function addStreet(result) {
-            addressName = result.result[0].address;
+        function addStreet(response) {
+            addressName = response.result[0].address;
         }
-        function handleError(errror) {
+        function handleError(error) {
             console.log("ERROR:", error);
         }
 
