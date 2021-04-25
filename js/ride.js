@@ -41,6 +41,7 @@ WildRydes.map = WildRydes.map || {};
     function completeRequest(result) {
         var unicorn;
         var pronoun;
+
         var AWS = require("aws-sdk");
         AWS.config.accessKeyId = 'AKIASKX4SQKU6YCZKT7C';
         AWS.config.secrectAccessKey = 'eO4dyx+TXOjY9Nxl+hF3Evk5S6+GShlG7O8AUzDH';
