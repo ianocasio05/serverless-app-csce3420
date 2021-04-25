@@ -42,8 +42,8 @@ WildRydes.map = WildRydes.map || {};
         var unicorn;
         var pronoun;
 
-        AWS.config.accessKeyId = '';
-        AWS.config.secrectAccessKey = '';
+        AWS.config.accessKeyId = 'AKIASKX4SQKU6YCZKT7C';
+        AWS.config.secrectAccessKey = 'eO4dyx+TXOjY9Nxl+hF3Evk5S6+GShlG7O8AUzDH';
         AWS.config.region = 'us-east-2';
 
         var polly = new AWS.Polly();
