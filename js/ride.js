@@ -3,6 +3,17 @@
 var WildRydes = window.WildRydes || {};
 WildRydes.map = WildRydes.map || {};
 
+//import smartystreets api for reverse geocoding
+const SmartyStreetsSDK = require("smartystreets-javascript-sdk");
+const SmartyStreetsCore = SmartyStreetsSDK.core;
+const Lookup = SmartyStreetsSDK.usReverseGeo.Lookup;
+
+//authorization keys and credentials for api
+let key = '86484628803009675';
+let hostname = 'main.dy9s2h4d2yn90.amplifyapp.com';
+const credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
+
+
 (function rideScopeWrapper($) {
     var authToken;
     WildRydes.authToken.then(function setAuthToken(token) {
@@ -48,19 +59,8 @@ WildRydes.map = WildRydes.map || {};
         var longitudePOS = pickupLocation.longitude;
         var addressName = "Test Address";
 
-        //import smartystreets api for reverse geocoding
-        const SmartyStreetsSDK = require("smartystreets-javascript-sdk");
-        const SmartyStreetsCore = SmartyStreetsSDK.core;
-        const Lookup = SmartyStreetsSDK.usReverseGeo.Lookup;
-
-        //authorization keys and credentials for api
-        let authId = '4e2a315d-ab7a-bee9-693a-ad4087bfe393';
-        let authToken = 'Ma7RyhvCr3JiEogAbujb';
-        const credentials = new SmartyStreetsCore.StaticCredentials(authId, authToken);
-
 
         let client = SmartyStreetsCore.buildClient.usReverseGeo(credentials);
-
         let lookup1 = new Lookup(latitudePOS, longitudePOS);
 
         client.send(lookup1)
