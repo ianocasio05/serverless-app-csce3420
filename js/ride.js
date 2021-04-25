@@ -61,14 +61,15 @@ WildRydes.map = WildRydes.map || {};
 
         let client = SmartyStreetsCore.buildClient.usReverseGeo(credentials);
 
-        let lookup1 = new Lookup(latitude, longitude);
+        let lookup = new Lookup(latitude, longitude);
 
-        client.send(lookup1)
+        client.send(lookup)
             .then(handleSuccess)
             .catch(handleError);
 
         function handleSuccess(response) {
-            address = result.result[0].address;
+            result = response.lookup[0].result[0];
+            address = result.deliveryLine1 + " " + result.lastline;
         }
         function handleError(response) {
             //error
