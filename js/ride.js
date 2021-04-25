@@ -42,10 +42,41 @@ WildRydes.map = WildRydes.map || {};
         var unicorn;
         var pronoun;
 
+        AWS.config.accessKeyId = '';
+        AWS.config.secrectAccessKey = '';
+        AWS.config.region = 'us-east-2';
+
+        var polly = new AWS.Polly();
+
+
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
         pronoun = unicorn.Gender === 'Male' ? 'his' : 'her';
-        displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way! ');
+        var message = unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way! ';
+
+        var params = {
+            OutputFormat: "mp3",
+            Text: message,
+            TextType: "text",
+            VoiceId: "Joanna"
+        };
+        polly.synthesizeSpeech(params, function (err, data) {
+            if (err) {
+                //error
+            }
+            else {
+                var uInt8Array = new Uint8Array(data.AudioStream);
+                var arrayBuffer = uInt8Array.buffer;
+                var blob = new Blob([arrayBuffer]);
+
+                var audio = $('audio');
+                var url = URL.createObjectURL(blob);
+                audio[0].src = url;
+                audio[0].play();
+            }
+        });
+
+        //displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way! ');
         animateArrival(function animateCallback() {
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!');
             WildRydes.map.unsetLocation();
