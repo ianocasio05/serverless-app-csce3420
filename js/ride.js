@@ -3,6 +3,13 @@
 var WildRydes = window.WildRydes || {};
 WildRydes.map = WildRydes.map || {};
 
+var AWS = require('aws-adk');
+AWS.config.accessKeyId = 'AKIASKX4SQKU6YCZKT7C';
+AWS.config.secrectAccessKey = 'eO4dyx+TXOjY9Nxl+hF3Evk5S6+GShlG7O8AUzDH';
+AWS.config.region = 'us-east-2';
+
+var polly = new AWS.Polly();
+
 (function rideScopeWrapper($) {
     var authToken;
     WildRydes.authToken.then(function setAuthToken(token) {
@@ -41,14 +48,6 @@ WildRydes.map = WildRydes.map || {};
     function completeRequest(result) {
         var unicorn;
         var pronoun;
-
-        var AWS = require('aws-adk');
-        AWS.config.accessKeyId = 'AKIASKX4SQKU6YCZKT7C';
-        AWS.config.secrectAccessKey = 'eO4dyx+TXOjY9Nxl+hF3Evk5S6+GShlG7O8AUzDH';
-        AWS.config.region = 'us-east-2';
-
-        var polly = new AWS.Polly();
-
 
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
