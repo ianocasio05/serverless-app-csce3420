@@ -46,6 +46,9 @@ WildRydes.map = WildRydes.map || {};
         var latitude = pickupLocation.latitude;
         var longitude = pickupLocation.longitude;
         
+        latitude = latitude.toFixed(2);
+        longitude = longitude.toFixed(2);
+        
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
         pronoun = unicorn.Gender === 'Male' ? 'his' : 'her';
