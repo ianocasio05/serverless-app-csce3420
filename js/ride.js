@@ -47,38 +47,6 @@ WildRydes.map = WildRydes.map || {};
         pronoun = unicorn.Gender === 'Male' ? 'his' : 'her';
         var message = unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way! ';
 
-        /*AWS.config.accessKeyId = 'AKIASKX4SQKU6YCZKT7C';
-        AWS.config.secrectAccessKey = 'eO4dyx+TXOjY9Nxl+hF3Evk5S6+GShlG7O8AUzDH';
-        AWS.config.region = 'us-east-2';*/
-        var AWS = require('aws-sdk');
-        var polly = new AWS.Polly({
-            accessKeyId: 'AKIASKX4SQKU7Q2S75NU',
-            secretAccessKey: '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',
-            region: 'us-east-2'
-        })
-
-        const input = {
-            Text: message,
-            OutputFormat: "mp3",
-            VoiceId: "Joanna"
-        }
-
-        polly.synthesizeSpeech(input, (err, data) => {
-            if (err) {
-                //error
-            }
-            else {
-                var uInt8Array = new Uint8Array(data.AudioStream);
-                var arrayBuffer = uInt8Array.buffer;
-                var blob = new Blob([arrayBuffer]);
-
-                var audio = $('audio');
-                var url = URL.creatObjectURL(blob);
-                audio[0].src = url;
-                audio[0].play();
-            }
-        })
-
         displayUpdate(message);
         animateArrival(function animateCallback() {
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!');
