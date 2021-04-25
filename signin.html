@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -19,8 +19,8 @@
     </head>
     <body>
         <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
 
         <div id="noCognitoMessage" class="configMessage" style="display: none;">
             <div class="backdrop"></div>
@@ -35,17 +35,17 @@
         </div>
 
         <header>
-          <img src="images/logo.png">
+            <img src="images/logo.png">
         </header>
 
 
         <section class="form-wrap">
             <h1>Sign In</h1>
             <form id="signinForm">
-              <input type="email" id="emailInputSignin" placeholder="Email" required>
-              <input type="password" id="passwordInputSignin" placeholder="Password" pattern=".*" required>
+                <input type="email" id="emailInputSignin" placeholder="Email" required>
+                <input type="password" id="passwordInputSignin" placeholder="Password" pattern=".*" required>
 
-              <input type="submit" value="Sign in">
+                <input type="submit" value="Sign in">
             </form>
         </section>
 
@@ -53,6 +53,7 @@
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/vendor/aws-cognito-sdk.min.js"></script>
         <script src="js/vendor/amazon-cognito-identity.min.js"></script>
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.892.0.min.js"></script>
         <script src="js/config.js"></script>
         <script src="js/cognito-auth.js"></script>
     </body>
