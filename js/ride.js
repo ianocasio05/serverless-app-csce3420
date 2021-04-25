@@ -46,7 +46,7 @@ WildRydes.map = WildRydes.map || {};
         var pickupLocation = WildRydes.map.selectedPoint;
         var latitude = pickupLocation.latitude;
         var longitude = pickupLocation.longitude;
-        var address = "Test Address";
+        var addressName = "Test Address";
 
         //import smartystreets api for reverse geocoding
         const SmartyStreetsSDK = require("smartystreets-javascript-sdk");
@@ -54,9 +54,9 @@ WildRydes.map = WildRydes.map || {};
         const Lookup = SmartyStreetsSDK.usReverseGeo.Lookup;
 
         //authorization keys and credentials for api
-        let key = '4e2a315d-ab7a-bee9-693a-ad4087bfe393';
-        let hostname = 'Ma7RyhvCr3JiEogAbujb';
-        const credentials = new SmartyStreetsCore.SharedCredentials(key, hostname);
+        let authId = '4e2a315d-ab7a-bee9-693a-ad4087bfe393';
+        let authToken = 'Ma7RyhvCr3JiEogAbujb';
+        const credentials = new SmartyStreetsCore.SharedCredentials(authId, authToken);
 
 
         let client = SmartyStreetsCore.buildClient.usReverseGeo(credentials);
@@ -64,21 +64,20 @@ WildRydes.map = WildRydes.map || {};
         let lookup = new Lookup(latitude, longitude);
 
         client.send(lookup)
-            .then(handleSuccess)
+            .then(addStreet)
             .catch(handleError);
 
-        function handleSuccess(response) {
-            //result = response.lookup[0].result[0];
-            //address = result.deliveryLine1 + " " + result.lastline;
+        function addStreet(result) {
+            addressName = result.result[0].address;
         }
-        function handleError(response) {
-            //error
+        function handleError(errror) {
+            console.log("ERROR:", error);
         }
 
         console.log('Response received from API: ', result);
         unicorn = result.Unicorn;
         pronoun = unicorn.Gender === 'Male' ? 'his' : 'her';
-        displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way to:  ' + address);
+        displayUpdate(unicorn.Name + ', your ' + unicorn.Color + ' unicorn, is on ' + pronoun + ' way to:  ' + addressName);
         animateArrival(function animateCallback() {
             displayUpdate(unicorn.Name + ' has arrived. Giddy up!');
             WildRydes.map.unsetLocation();
